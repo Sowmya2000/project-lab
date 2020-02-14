@@ -1,0 +1,34 @@
+package userinfo;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+public class connectDB {
+	static Connection con = null;
+	static String databaseName="";
+	static String url="jdbc:mysql://localhost:3306/"+databaseName;
+	static String username="root";
+	static String password="bmscecse";
+
+	public static void main(String[] args)throws InstantiationException,IllegalAccessException,ClassNotFoundException,SQLException {
+		// TODO Auto-generated method stub
+		Class.forName("com.mysql.jdbc.Driver").newInstance();
+		con=DriverManager.getConnection("jdbc:mysql://localhost:3306/demo","root","bmscecse");
+		//CREATE A STATEMENT
+		Statement mystmt=con.createStatement();
+		//EXECUTE SQL QUERY
+		ResultSet myRs = mystmt.executeQuery("select* from person");
+		//PROCESS THE RESULTSET
+		while(myRs.next()) {
+			System.out.println(myRs.getString("driver_id")+","+myRs.getString("names"));
+		}
+		
+		
+		
+
+	}
+
+}
